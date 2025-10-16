@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disaster Damage Assessment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Post-Disaster Damage Assessment</h1>
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="pre_image">Pre-disaster Image</label>
+                <input type="file" id="pre_image" name="pre_image" required>
+            </div>
+            <div class="form-group">
+                <label for="post_image">Post-disaster Image</label>
+                <input type="file" id="post_image" name="post_image" required>
+            </div>
+            <button type="submit">Assess Damage</button>
+        </form>
+
+        {% if output_image %}
+        <div class="results">
+            <h2>Results</h2>
+            <div class="image-grid">
+                <div class="image-container">
+                    <h3>Pre-disaster</h3>
+                    <img src="{{ pre_image }}" alt="Pre-disaster Image">
+                </div>
+                <div class="image-container">
+                    <h3>Post-disaster</h3>
+                    <img src="{{ post_image }}" alt="Post-disaster Image">
+                </div>
+                <div class="image-container">
+                    <h3>Damage Assessment</h3>
+                    <img src="{{ output_image }}" alt="Output Image">
+                </div>
+            </div>
+            <div class="chart-container">
+                <h2>Damage Analysis</h2>
+                <canvas id="damageChart"></canvas>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    {% if damage_analysis %}
+    <script>
+        const damageData = {{ damage_analysis|safe }};
+        const labels = Object.keys(damageData);
+        const data = Object.values(damageData);
+        const backgroundColors = labels.map(label => {
+            if (label === 'No Damage/BG') return 'rgba(0, 0, 0, 0.6)';
+            if (label === 'Minor Damage') return 'rgba(0, 0, 255, 0.6)';
+            if (label === 'Moderate Damage') return 'rgba(255, 255, 0, 0.6)';
+            if (label === 'Major Damage') return 'rgba(255, 165, 0, 0.6)';
+            if (label === 'Destroyed') return 'rgba(255, 0, 0, 0.6)';
+            return 'rgba(128, 128, 128, 0.6)';
+        });
+        const ctx = document.getElementById('damageChart').getContext('2d');
+        new Chart(ctx, {type: 'pie', data: {labels: labels, datasets: [{label: 'Damage Distribution (%)', data: data, backgroundColor: backgroundColors, borderWidth: 1}]}});
+    </script>
+    {% endif %}
+</body>
+</html>
