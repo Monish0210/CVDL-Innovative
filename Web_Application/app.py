@@ -161,6 +161,10 @@ def index():
 
     return render_template('index.html', gsd_used=app.config['DEFAULT_GSD']) 
 
+@app.route('/sample_images')
+def sample_images():
+    return render_template('sample_images.html')
+
 
 @app.route('/evaluation')
 def evaluation():

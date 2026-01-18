@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
     <header class="app-header">
         <div class="header-content">
@@ -14,18 +16,22 @@
                 <h1>Post-Disaster Damage Assessment System</h1>
                 <p class="header-subtitle">AI-Powered Remote Sensing Analysis</p>
             </div>
-            <nav><a href="{{ url_for('evaluation') }}" class="nav-link">View Model Evaluation</a></nav>
+            <nav>
+                <a href="{{ url_for('sample_images') }}" class="nav-link">Images</a>
+                <a href="{{ url_for('evaluation') }}" class="nav-link">View Model Evaluation</a>
+            </nav>
         </div>
     </header>
-    
+
     <div class="container">
         <!-- Upload Section -->
         <section class="upload-section card">
             <div class="section-header">
                 <h2>Upload Satellite Imagery</h2>
-                <p class="section-description">Upload pre- and post-disaster images for automated AI-based damage analysis</p>
+                <p class="section-description">Upload pre- and post-disaster images for automated AI-based damage
+                    analysis</p>
             </div>
-            
+
             <form method="post" enctype="multipart/form-data">
                 <div class="form-grid">
                     <div class="form-group">
@@ -35,7 +41,7 @@
                         </div>
                         <small class="helper-text">Upload image taken before the disaster</small>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="post_image">Post-disaster Image</label>
                         <div class="file-input-wrapper">
@@ -43,14 +49,15 @@
                         </div>
                         <small class="helper-text">Upload image taken after the disaster</small>
                     </div>
-                    
+
                     <div class="form-group gsd-group">
                         <label for="gsd">Ground Sample Distance (m/pixel)</label>
-                        <input type="number" id="gsd" name="gsd" step="0.01" min="0.01" value="{{ gsd_used | default(0.5) }}" required>
+                        <input type="number" id="gsd" name="gsd" step="0.01" min="0.01"
+                            value="{{ gsd_used | default(0.5) }}" required>
                         <small class="helper-text">Used for accurate area estimation</small>
                     </div>
                 </div>
-                
+
                 <div class="form-actions">
                     <button type="submit" class="btn-primary">
                         <span class="btn-text">Run Assessment</span>
@@ -66,36 +73,45 @@
                 <h2>Assessment Results</h2>
                 <div class="status-badge">✅ Analysis Complete</div>
             </div>
-            
+
             <div class="image-grid">
                 {% if pre_image_rel_path %}
                 <div class="image-container">
-                    <div class="image-header"><h3>Pre-disaster</h3></div>
+                    <div class="image-header">
+                        <h3>Pre-disaster</h3>
+                    </div>
                     <div class="image-wrapper">
-                        <img src="{{ pre_image_rel_path }}" alt="Pre-disaster Image" onerror="this.src='https://via.placeholder.com/256?text=No+Image';">
+                        <img src="{{ pre_image_rel_path }}" alt="Pre-disaster Image"
+                            onerror="this.src='https://via.placeholder.com/256?text=No+Image';">
                     </div>
                 </div>
                 {% endif %}
 
                 {% if post_image_rel_path %}
                 <div class="image-container">
-                    <div class="image-header"><h3>Post-disaster</h3></div>
+                    <div class="image-header">
+                        <h3>Post-disaster</h3>
+                    </div>
                     <div class="image-wrapper">
-                        <img src="{{ post_image_rel_path }}" alt="Post-disaster Image" onerror="this.src='https://via.placeholder.com/256?text=No+Image';">
+                        <img src="{{ post_image_rel_path }}" alt="Post-disaster Image"
+                            onerror="this.src='https://via.placeholder.com/256?text=No+Image';">
                     </div>
                 </div>
                 {% endif %}
 
                 {% if output_image_rel_path %}
                 <div class="image-container">
-                    <div class="image-header"><h3>Damage Segmentation</h3></div>
+                    <div class="image-header">
+                        <h3>Damage Segmentation</h3>
+                    </div>
                     <div class="image-wrapper">
-                        <img src="{{ output_image_rel_path }}" alt="Damage Segmentation Map" onerror="this.src='https://via.placeholder.com/256?text=No+Result';">
+                        <img src="{{ output_image_rel_path }}" alt="Damage Segmentation Map"
+                            onerror="this.src='https://via.placeholder.com/256?text=No+Result';">
                     </div>
                 </div>
                 {% endif %}
             </div>
-            
+
             <!-- Analysis Results -->
             <div class="analysis-grid">
                 <div class="analysis-item chart-item">
@@ -104,7 +120,7 @@
                         <canvas id="damagePieChart"></canvas>
                     </div>
                 </div>
-                
+
                 <div class="analysis-item table-item">
                     <h3 class="table-title">Estimated Damage Area</h3>
                     <div class="table-wrapper">
@@ -199,4 +215,5 @@
     </script>
     {% endif %}
 </body>
+
 </html>

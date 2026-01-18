@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Images - AI Disaster Damage Assessment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <header class="app-header">
+        <div class="header-content">
+            <div class="header-title">
+                <h1>Post-Disaster Damage Assessment System</h1>
+                <p class="header-subtitle">AI-Powered Remote Sensing Analysis</p>
+            </div>
+            <nav>
+                <a href="{{ url_for('index') }}" class="nav-link">Home</a>
+                <a href="{{ url_for('evaluation') }}" class="nav-link">View Model Evaluation</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <a href="{{ url_for('index') }}" class="back-link">← Back to Assessment</a>
+
+        <div class="page-intro">
+            <h2>Sample Satellite Imagery</h2>
+            <p class="section-description">
+                Use these sample images to test the damage assessment model.
+                Download both the pre-disaster and post-disaster images, then upload them on the home page.
+            </p>
+        </div>
+
+        <div class="sample-grid">
+            <!-- Pre-Disaster Image -->
+            <div class="sample-card">
+                <img src="{{ url_for('static', filename='uploads/mexico-earthquake_00000142_pre_disaster.png') }}"
+                    alt="Pre-Disaster Sample" class="sample-image">
+                <div class="sample-content">
+                    <h3 class="sample-title">Pre-Disaster Image</h3>
+                    <p class="sample-description">
+                        This satellite image shows the area before the disaster occurred.
+                        It serves as the reference point for identifying structures and features.
+                    </p>
+                    <div class="sample-actions">
+                        <a href="{{ url_for('static', filename='uploads/mexico-earthquake_00000142_pre_disaster.png') }}"
+                            download="sample_pre_disaster.png" class="btn-download">
+                            Download Image
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Post-Disaster Image -->
+            <div class="sample-card">
+                <img src="{{ url_for('static', filename='uploads/mexico-earthquake_00000142_post_disaster.png') }}"
+                    alt="Post-Disaster Sample" class="sample-image">
+                <div class="sample-content">
+                    <h3 class="sample-title">Post-Disaster Image</h3>
+                    <p class="sample-description">
+                        This image shows the same area after the disaster.
+                        The model compares this with the pre-disaster image to detect changes and assess damage.
+                    </p>
+                    <div class="sample-actions">
+                        <a href="{{ url_for('static', filename='uploads/mexico-earthquake_00000142_post_disaster.png') }}"
+                            download="sample_post_disaster.png" class="btn-download">
+                            Download Image
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
