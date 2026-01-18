@@ -24,7 +24,7 @@ This project demonstrates a Siamese U-Net (SiamUnet) model trained to identify c
 
 - **Siamese U-Net Architecture:** Detects differences between pre- and post-event satellite images.
 - **Simple Upload Interface:** Upload two images and instantly view the inference result.
-- **Lightweight Deployment:** Designed for easy hosting on Render or any cloud platform.
+- **Lightweight Deployment:** Designed for easy hosting on Hugging Face Spaces or any cloud platform.
 - **Reusable Model Architecture:** Plug in any compatible .pt file for experimentation.
 - **Clean Folder Structure:** Separation of training and deployment environments for clarity.
 
