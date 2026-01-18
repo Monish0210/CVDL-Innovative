@@ -40,7 +40,7 @@ This project demonstrates a Siamese U-Net (SiamUnet) model trained to identify c
 - **Backend:** Flask
 - **Language:** Python
 - **Styling:** HTML + CSS
-- **Deployment:** Render
+- **Deployment:** Hugging Face Spaces
 
 ## 🚀 Getting Started
 
